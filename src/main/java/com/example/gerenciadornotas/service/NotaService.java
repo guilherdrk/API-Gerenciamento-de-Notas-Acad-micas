@@ -25,7 +25,7 @@ public class NotaService {
     }
 
     // Criar uma nova nota
-    private NotaDTO criarNota(NotaDTO notaDTO){
+    public NotaDTO criarNota(NotaDTO notaDTO){
         Nota nota = new Nota();
         nota.setTituloCadeira(notaDTO.getTituloCadeira());
         nota.setValorNota(notaDTO.getValorNota());
@@ -44,14 +44,14 @@ public class NotaService {
         return notaDTO;
     }
     // Obter nota por ID
-    private NotaDTO getNotaById(Long id){
+    public NotaDTO getNotaById(Long id){
         Nota nota = notaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nota não encontrada com ID: " + id));
         NotaDTO notaDTO = new NotaDTO();
         BeanUtils.copyProperties(nota, notaDTO);
         return notaDTO;
     }
     // Listar todas as notas com paginação e
-    private Page<NotaDTO> getAllNotas(int page, int size, String sortBy, String sortDirection){
+    public Page<NotaDTO> getAllNotas(int page, int size, String sortBy, String sortDirection){
         Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);
 
